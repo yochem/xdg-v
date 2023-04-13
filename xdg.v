@@ -1,4 +1,5 @@
 module xdg
+
 // xdg implements the XDG Base Directory Specification (version 0.8) by the
 // Free Desktop organisation (freedesktop.org). The full specification can be
 // found on
@@ -7,7 +8,6 @@ module xdg
 // The specification specifies where applications should look for files,
 // depending on their use-case. All these locations can be set using
 // environment variables.
-
 import os
 
 fn path_from_env(var string) ?string {
@@ -33,7 +33,7 @@ fn paths_from_env(var string) ?[]string {
 	return none
 }
 
-// cache_home is the base directory for user-specific date files.
+// cache_home is the base directory for user-specific non-essential data files.
 // The environment variable `$XDG_CACHE_HOME` controls the return value of this
 // function. When the variable is either not set or empty, a default equal to
 // `$HOME/.cache` is returned.
@@ -50,9 +50,7 @@ pub fn cache_home() string {
 // function. When the variable is either not set or empty, a default equal to
 // `/etc/xdg` is returned.
 pub fn config_dirs() []string {
-	return path_from_env('XDG_CONFIG_DIRS') or {
-		['/etc/xdg']
-	}
+	return path_from_env('XDG_CONFIG_DIRS') or { ['/etc/xdg'] }
 }
 
 // config_home is the base directory for user-specific configuration files.
@@ -70,9 +68,7 @@ pub fn config_home() string {
 // $XDG_DATA_DIRS is either not set or empty, a value equal to
 // /usr/local/share/:/usr/share/ should be used.
 pub fn data_dirs() []string {
-	return path_from_env('XDG_DATA_DIRS') or {
-		['/usr/local/share', '/usr/share/']
-	}
+	return path_from_env('XDG_DATA_DIRS') or { ['/usr/local/share', '/usr/share/'] }
 }
 
 // data_home is the base directory for user-specific date files.
