@@ -22,7 +22,6 @@ Environment Variable | `v`             | Default return value
 `$XDG_CONFIG_HOME`   | `config_home()` | `'$HOME/.config'`
 `$XDG_DATA_HOME`     | `data_home()`   | `'$HOME/.local/share'`
 `$XDG_STATE_HOME`    | `state_home()`  | `'$HOME/.local/state'`
-                     |                 |
 `$XDG_CONFIG_DIRS`   | `config_dirs()` | `['/etc/xdg']`
 `$XDG_DATA_DIRS`     | `data_dirs()`   | `['/usr/local/share', '/usr/share']`
 `$XDG__RUNTIME_DIR`  | `runtime_dir()` | `none`
