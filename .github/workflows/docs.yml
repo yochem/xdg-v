@@ -1,46 +1,54 @@
-name: Build docs
+name: Deploy V docs to Github Pages
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Runs on pushes targeting the default branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
       - name: Install V
         run: |
           git clone https://github.com/vlang/v
           cd v
           make
           sudo ./v symlink
-
-      - name: Build docs
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v2
+      - name: Build docs with V
         run: v doc -readme -o docs -f html .
-        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'docs/'
-        
+          path: ./docs
+
   # Deployment job
   deploy:
     environment:
@@ -51,4 +59,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v1
