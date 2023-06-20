@@ -35,6 +35,7 @@ jobs:
           cd v
           make
           sudo ./v symlink
+          which v
       - name: Checkout
         uses: actions/checkout@v3
         with:
