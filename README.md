@@ -16,7 +16,11 @@ $ v install yochem.xdg
 
 ## Usage
 
-Environment Variable | `v`             | Default return value
+Module documentation can be found on the GitHub Pages of this repo:
+https://yochem.nl/xdg-v/. But here is a table with the XDG variables and their
+defaults.
+
+Environment Variable | V               | Default return value
 ---------------------|-----------------|------------------------------------
 `$XDG_CACHE_HOME`    | `cache_home()`  | `'$HOME/.cache'`
 `$XDG_CONFIG_HOME`   | `config_home()` | `'$HOME/.config'`
@@ -24,7 +28,7 @@ Environment Variable | `v`             | Default return value
 `$XDG_STATE_HOME`    | `state_home()`  | `'$HOME/.local/state'`
 `$XDG_CONFIG_DIRS`   | `config_dirs()` | `['/etc/xdg']`
 `$XDG_DATA_DIRS`     | `data_dirs()`   | `['/usr/local/share', '/usr/share']`
-`$XDG__RUNTIME_DIR`  | `runtime_dir()` | `none`
+`$XDG_RUNTIME_DIR`   | `runtime_dir()` | `none`
 
 
 ## pathlib branch
