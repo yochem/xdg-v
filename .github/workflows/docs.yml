@@ -34,7 +34,7 @@ jobs:
           sudo ./v symlink
       - name: Build docs with V
         run: |
-          v doc -readme -o docs -f html .
+          v doc -o docs -f html .
           mv docs/xdg.html docs/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
