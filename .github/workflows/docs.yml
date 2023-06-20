@@ -35,7 +35,6 @@ jobs:
           cd v
           make
           sudo ./v symlink
-          which v
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -44,7 +43,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v2
       - name: Build docs with V
-        run: v doc -readme -o docs -f html .
+        run: /usr/local/bin/v doc -readme -o docs -f html .
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
